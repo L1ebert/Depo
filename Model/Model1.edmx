@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Tolmachev.Control10Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PreventiveWork">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdWork" Type="int" Nullable="false" />
+          <Property Name="IdVan" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="Van">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="nvarchar" MaxLength="9" Nullable="false" />
+          <Property Name="IdFloor" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="IdPreventiveWork" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Record_Van">
+          <End Role="Van" Type="Self.Van" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Van">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="IdVan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Work">
+          <End Role="Work" Type="Self.Work" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="IdWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Van_Floor">
+          <End Role="Floor" Type="Self.Floor" Multiplicity="1" />
+          <End Role="Van" Type="Self.Van" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Van">
+              <PropertyRef Name="IdFloor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_PreventiveWork">
+          <End Role="PreventiveWork" Type="Self.PreventiveWork" Multiplicity="1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreventiveWork">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="IdPreventiveWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TolmachevControl10ModelContainer">
+          <EntitySet Name="Floor" EntityType="Self.Floor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PreventiveWork" EntityType="Self.PreventiveWork" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Record" EntityType="Self.Record" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Van" EntityType="Self.Van" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Work" EntityType="Self.Work" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Record_Van" Association="Self.FK_Record_Van">
+            <End Role="Van" EntitySet="Van" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Work" Association="Self.FK_Record_Work">
+            <End Role="Work" EntitySet="Work" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Van_Floor" Association="Self.FK_Van_Floor">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Van" EntitySet="Van" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_PreventiveWork" Association="Self.FK_Work_PreventiveWork">
+            <End Role="PreventiveWork" EntitySet="PreventiveWork" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Tolmachev.Control10Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Floor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Van" Relationship="Self.FK_Van_Floor" FromRole="Floor" ToRole="Van" />
+        </EntityType>
+        <EntityType Name="PreventiveWork">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Work" Relationship="Self.FK_Work_PreventiveWork" FromRole="PreventiveWork" ToRole="Work" />
+        </EntityType>
+        <EntityType Name="Record">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdWork" Type="Int32" Nullable="false" />
+          <Property Name="IdVan" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Van" Relationship="Self.FK_Record_Van" FromRole="Record" ToRole="Van" />
+          <NavigationProperty Name="Work" Relationship="Self.FK_Record_Work" FromRole="Record" ToRole="Work" />
+        </EntityType>
+        <EntityType Name="Van">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="String" MaxLength="9" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdFloor" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Floor" Relationship="Self.FK_Van_Floor" FromRole="Van" ToRole="Floor" />
+          <NavigationProperty Name="Record" Relationship="Self.FK_Record_Van" FromRole="Van" ToRole="Record" />
+        </EntityType>
+        <EntityType Name="Work">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdPreventiveWork" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PreventiveWork" Relationship="Self.FK_Work_PreventiveWork" FromRole="Work" ToRole="PreventiveWork" />
+          <NavigationProperty Name="Record" Relationship="Self.FK_Record_Work" FromRole="Work" ToRole="Record" />
+        </EntityType>
+        <Association Name="FK_Van_Floor">
+          <End Role="Floor" Type="Self.Floor" Multiplicity="1" />
+          <End Role="Van" Type="Self.Van" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Floor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Van">
+              <PropertyRef Name="IdFloor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Work_PreventiveWork">
+          <End Role="PreventiveWork" Type="Self.PreventiveWork" Multiplicity="1" />
+          <End Role="Work" Type="Self.Work" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreventiveWork">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Work">
+              <PropertyRef Name="IdPreventiveWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Van">
+          <End Role="Van" Type="Self.Van" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Van">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="IdVan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Record_Work">
+          <End Role="Work" Type="Self.Work" Multiplicity="1" />
+          <End Role="Record" Type="Self.Record" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Record">
+              <PropertyRef Name="IdWork" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TolmachevDepoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Floor" EntityType="Self.Floor" />
+          <EntitySet Name="PreventiveWork" EntityType="Self.PreventiveWork" />
+          <EntitySet Name="Record" EntityType="Self.Record" />
+          <EntitySet Name="Van" EntityType="Self.Van" />
+          <EntitySet Name="Work" EntityType="Self.Work" />
+          <AssociationSet Name="FK_Van_Floor" Association="Self.FK_Van_Floor">
+            <End Role="Floor" EntitySet="Floor" />
+            <End Role="Van" EntitySet="Van" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Work_PreventiveWork" Association="Self.FK_Work_PreventiveWork">
+            <End Role="PreventiveWork" EntitySet="PreventiveWork" />
+            <End Role="Work" EntitySet="Work" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Van" Association="Self.FK_Record_Van">
+            <End Role="Van" EntitySet="Van" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Record_Work" Association="Self.FK_Record_Work">
+            <End Role="Work" EntitySet="Work" />
+            <End Role="Record" EntitySet="Record" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TolmachevControl10ModelContainer" CdmEntityContainer="TolmachevDepoEntities">
+          <EntitySetMapping Name="Floor">
+            <EntityTypeMapping TypeName="Tolmachev.Control10Model.Floor">
+              <MappingFragment StoreEntitySet="Floor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PreventiveWork">
+            <EntityTypeMapping TypeName="Tolmachev.Control10Model.PreventiveWork">
+              <MappingFragment StoreEntitySet="PreventiveWork">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Record">
+            <EntityTypeMapping TypeName="Tolmachev.Control10Model.Record">
+              <MappingFragment StoreEntitySet="Record">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IdWork" ColumnName="IdWork" />
+                <ScalarProperty Name="IdVan" ColumnName="IdVan" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Van">
+            <EntityTypeMapping TypeName="Tolmachev.Control10Model.Van">
+              <MappingFragment StoreEntitySet="Van">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="IdFloor" ColumnName="IdFloor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Work">
+            <EntityTypeMapping TypeName="Tolmachev.Control10Model.Work">
+              <MappingFragment StoreEntitySet="Work">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdPreventiveWork" ColumnName="IdPreventiveWork" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

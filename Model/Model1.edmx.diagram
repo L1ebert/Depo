@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="88d6206b837847db9dc59e84f26da43f" Name="Diagram1">
+        <EntityTypeShape EntityType="Tolmachev.Control10Model.Floor" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tolmachev.Control10Model.PreventiveWork" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tolmachev.Control10Model.Record" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tolmachev.Control10Model.Van" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Tolmachev.Control10Model.Work" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <AssociationConnector Association="Tolmachev.Control10Model.FK_Van_Floor" ManuallyRouted="false" />
+        <AssociationConnector Association="Tolmachev.Control10Model.FK_Work_PreventiveWork" ManuallyRouted="false" />
+        <AssociationConnector Association="Tolmachev.Control10Model.FK_Record_Van" ManuallyRouted="false" />
+        <AssociationConnector Association="Tolmachev.Control10Model.FK_Record_Work" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
